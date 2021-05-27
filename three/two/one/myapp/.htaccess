@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /three/two/one/myapp
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#According to https://akrabat.com/running-slim-4-in-a-subdirectory/
+#You need to comment it when using subfolder RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
