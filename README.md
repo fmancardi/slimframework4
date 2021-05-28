@@ -47,6 +47,32 @@ Test are really silly
 | /two/one/myapp    | GET http://\<YOUR IP>/two/one/myapp      |
 | /three/two/one/myapp | GET http://\<YOUR IP>/three/two/one/myapp      |
 
+Server version: Apache/2.4.41 (Ubuntu)
+Server built:   2020-08-12T19:46:17
+
+# TestLink example
+
+|         |            | 
+| ------------- |-------------| 
+| server        |  Ubuntu 20.04 on WSL2 |
+| webserver    | Apache/2.4.41 (Ubuntu) built: 2020-08-12T19:46:17|
+| installation folder    | /var/www/html/tl      |
+
+## .htaccess example  
+RewriteEngine On  
+**RewriteBase /tl/lib/api/rest/v3**  
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteRule ^ index.php [QSA,L]  
+
+## index.php excerpt  
+...  
+require 'RestApi.class.php';
+
+$app = AppFactory::create();  
+**$basePath = "/tl/lib/api/rest/v3";**  
+**$app->setBasePath($basePath);**  
+$app->restApi = new RestApi();  
+...
 
 # References
 https://akrabat.com/running-slim-4-in-a-subdirectory/  
